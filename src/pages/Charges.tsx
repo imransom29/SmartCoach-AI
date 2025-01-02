@@ -1,89 +1,118 @@
 import { Card } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useEffect } from "react";
 
 const Charges = () => {
+  useEffect(() => {
+    // Animation for cards on scroll
+    const cards = document.querySelectorAll('.pricing-card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="min-h-screen bg-slate-900 text-white pt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-3xl md:text-4xl font-montserrat font-bold mb-12 text-center">
+    <div 
+      className="min-h-screen bg-slate-900 text-white pt-20 relative"
+      style={{
+        backgroundImage: 'url("https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&q=80")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      <div className="absolute inset-0 bg-slate-900/90 backdrop-blur-sm" />
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 className="text-4xl md:text-5xl font-montserrat font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-violet-400 animate-fade-in">
           Training Plans & Pricing
         </h1>
 
-        {/* Individual Sessions */}
         <div className="space-y-8">
-          <Card className="bg-slate-800/50 border-slate-700 p-6">
-            <h2 className="text-2xl font-montserrat font-semibold mb-6">Individual Training Sessions</h2>
+          {/* Individual Sessions */}
+          <Card className="pricing-card bg-slate-800/50 border-slate-700 p-6 backdrop-blur-md transition-all duration-500 opacity-0 transform translate-y-4 hover:shadow-xl hover:shadow-blue-500/10">
+            <h2 className="text-2xl font-montserrat font-semibold mb-6 text-blue-400">Individual Training (Monthly Plan - 8 Sessions)</h2>
             <Table>
               <TableHeader>
                 <TableRow className="border-slate-700">
                   <TableHead className="text-white">Description</TableHead>
-                  <TableHead className="text-white">1-Hour Session</TableHead>
-                  <TableHead className="text-white">2-Hour Session</TableHead>
+                  <TableHead className="text-white">1-Hour Sessions</TableHead>
+                  <TableHead className="text-white">2-Hour Sessions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 <TableRow className="border-slate-700">
-                  <TableCell>Base Cost per Session</TableCell>
-                  <TableCell>₹600</TableCell>
-                  <TableCell>₹1,200</TableCell>
+                  <TableCell>Base Cost</TableCell>
+                  <TableCell>₹4,800</TableCell>
+                  <TableCell>₹9,600</TableCell>
                 </TableRow>
                 <TableRow className="border-slate-700">
                   <TableCell>Court Charges</TableCell>
-                  <TableCell>₹135</TableCell>
-                  <TableCell>₹270</TableCell>
+                  <TableCell>₹1,080</TableCell>
+                  <TableCell>₹2,160</TableCell>
                 </TableRow>
                 <TableRow className="border-slate-700">
                   <TableCell>Shuttle Cost</TableCell>
-                  <TableCell>₹130</TableCell>
-                  <TableCell>₹130</TableCell>
+                  <TableCell>₹1,040</TableCell>
+                  <TableCell>₹1,040</TableCell>
                 </TableRow>
-                <TableRow className="border-slate-700 font-semibold">
-                  <TableCell>Total per Session</TableCell>
-                  <TableCell>₹865</TableCell>
-                  <TableCell>₹1,600</TableCell>
+                <TableRow className="border-slate-700 font-semibold text-blue-400">
+                  <TableCell>Total Monthly Cost</TableCell>
+                  <TableCell>₹6,920</TableCell>
+                  <TableCell>₹12,800</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
           </Card>
 
           {/* Group Sessions */}
-          <Card className="bg-slate-800/50 border-slate-700 p-6">
-            <h2 className="text-2xl font-montserrat font-semibold mb-6">Group Training Sessions (Per Person)</h2>
+          <Card className="pricing-card bg-slate-800/50 border-slate-700 p-6 backdrop-blur-md transition-all duration-500 opacity-0 transform translate-y-4 hover:shadow-xl hover:shadow-violet-500/10">
+            <h2 className="text-2xl font-montserrat font-semibold mb-6 text-violet-400">Group Training - Monthly Cost Per Person (8 Sessions)</h2>
             
             {/* 1-Hour Group Sessions */}
             <div className="mb-8">
-              <h3 className="text-xl font-montserrat mb-4">1-Hour Sessions</h3>
+              <h3 className="text-xl font-montserrat mb-4 text-violet-300">1-Hour Sessions</h3>
               <Table>
                 <TableHeader>
                   <TableRow className="border-slate-700">
                     <TableHead className="text-white">Group Size</TableHead>
                     <TableHead className="text-white">Base Cost</TableHead>
-                    <TableHead className="text-white">Court Charges Split</TableHead>
-                    <TableHead className="text-white">Shuttle Cost Split</TableHead>
-                    <TableHead className="text-white">Total per Person</TableHead>
+                    <TableHead className="text-white">Court Charges</TableHead>
+                    <TableHead className="text-white">Shuttle Cost</TableHead>
+                    <TableHead className="text-white">Total Monthly Cost</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   <TableRow className="border-slate-700">
                     <TableCell>3 People</TableCell>
-                    <TableCell>₹400</TableCell>
-                    <TableCell>₹45</TableCell>
-                    <TableCell>₹44</TableCell>
-                    <TableCell>₹489</TableCell>
+                    <TableCell>₹3,200</TableCell>
+                    <TableCell>₹360</TableCell>
+                    <TableCell>₹352</TableCell>
+                    <TableCell className="font-semibold text-violet-400">₹3,912</TableCell>
                   </TableRow>
                   <TableRow className="border-slate-700">
                     <TableCell>4 People</TableCell>
-                    <TableCell>₹400</TableCell>
-                    <TableCell>₹34</TableCell>
-                    <TableCell>₹33</TableCell>
-                    <TableCell>₹467</TableCell>
+                    <TableCell>₹3,200</TableCell>
+                    <TableCell>₹272</TableCell>
+                    <TableCell>₹264</TableCell>
+                    <TableCell className="font-semibold text-violet-400">₹3,736</TableCell>
                   </TableRow>
                   <TableRow className="border-slate-700">
                     <TableCell>5 People</TableCell>
-                    <TableCell>₹400</TableCell>
-                    <TableCell>₹27</TableCell>
-                    <TableCell>₹26</TableCell>
-                    <TableCell>₹453</TableCell>
+                    <TableCell>₹3,200</TableCell>
+                    <TableCell>₹216</TableCell>
+                    <TableCell>₹208</TableCell>
+                    <TableCell className="font-semibold text-violet-400">₹3,624</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -91,45 +120,45 @@ const Charges = () => {
 
             {/* 2-Hour Group Sessions */}
             <div>
-              <h3 className="text-xl font-montserrat mb-4">2-Hour Sessions</h3>
+              <h3 className="text-xl font-montserrat mb-4 text-violet-300">2-Hour Sessions</h3>
               <Table>
                 <TableHeader>
                   <TableRow className="border-slate-700">
                     <TableHead className="text-white">Group Size</TableHead>
                     <TableHead className="text-white">Base Cost</TableHead>
-                    <TableHead className="text-white">Court Charges Split</TableHead>
-                    <TableHead className="text-white">Shuttle Cost Split</TableHead>
-                    <TableHead className="text-white">Total per Person</TableHead>
+                    <TableHead className="text-white">Court Charges</TableHead>
+                    <TableHead className="text-white">Shuttle Cost</TableHead>
+                    <TableHead className="text-white">Total Monthly Cost</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   <TableRow className="border-slate-700">
                     <TableCell>3 People</TableCell>
-                    <TableCell>₹800</TableCell>
-                    <TableCell>₹90</TableCell>
-                    <TableCell>₹44</TableCell>
-                    <TableCell>₹934</TableCell>
+                    <TableCell>₹6,400</TableCell>
+                    <TableCell>₹720</TableCell>
+                    <TableCell>₹352</TableCell>
+                    <TableCell className="font-semibold text-violet-400">₹7,472</TableCell>
                   </TableRow>
                   <TableRow className="border-slate-700">
                     <TableCell>4 People</TableCell>
-                    <TableCell>₹800</TableCell>
-                    <TableCell>₹68</TableCell>
-                    <TableCell>₹33</TableCell>
-                    <TableCell>₹901</TableCell>
+                    <TableCell>₹6,400</TableCell>
+                    <TableCell>₹544</TableCell>
+                    <TableCell>₹264</TableCell>
+                    <TableCell className="font-semibold text-violet-400">₹7,208</TableCell>
                   </TableRow>
                   <TableRow className="border-slate-700">
                     <TableCell>5 People</TableCell>
-                    <TableCell>₹800</TableCell>
-                    <TableCell>₹54</TableCell>
-                    <TableCell>₹26</TableCell>
-                    <TableCell>₹880</TableCell>
+                    <TableCell>₹6,400</TableCell>
+                    <TableCell>₹432</TableCell>
+                    <TableCell>₹208</TableCell>
+                    <TableCell className="font-semibold text-violet-400">₹7,040</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
             </div>
           </Card>
 
-          <div className="mt-8 p-4 bg-blue-500/10 rounded-lg border border-blue-500/20">
+          <div className="mt-8 p-4 bg-blue-500/10 rounded-lg border border-blue-500/20 animate-pulse">
             <p className="text-center text-gray-300">
               All plans include 8 sessions per month. Starting from January 15th onwards.
             </p>

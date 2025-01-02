@@ -2,9 +2,17 @@ import { Award, Target, Zap } from "lucide-react";
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-slate-900 text-white pt-20">
+    <div className="min-h-screen bg-slate-900 text-white pt-20 relative">
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-fixed"
+        style={{
+          backgroundImage: 'url("https://images.unsplash.com/photo-1613922508791-b6e237e4d051?auto=format&fit=crop&q=80")',
+          filter: 'brightness(0.2)'
+        }}
+      />
+
       {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center animate-fadeIn">
           <h1 className="text-4xl md:text-6xl font-montserrat font-bold mb-6 bg-gradient-to-r from-blue-500 to-blue-300 bg-clip-text text-transparent">
             Elevate Your Game
@@ -16,19 +24,19 @@ const Home = () => {
 
         {/* Features */}
         <div className="grid md:grid-cols-3 gap-8 mt-16">
-          <div className="bg-slate-800/50 p-6 rounded-lg border border-slate-700 hover:border-blue-500/50 transition-all duration-300">
+          <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-lg border border-slate-700 hover:border-blue-500/50 transition-all duration-300">
             <Target className="w-12 h-12 text-blue-500 mb-4" />
             <h3 className="text-xl font-montserrat font-semibold mb-2">Personalized Training</h3>
             <p className="text-gray-400">One-on-one sessions tailored to your skill level and goals</p>
           </div>
           
-          <div className="bg-slate-800/50 p-6 rounded-lg border border-slate-700 hover:border-blue-500/50 transition-all duration-300">
+          <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-lg border border-slate-700 hover:border-blue-500/50 transition-all duration-300">
             <Zap className="w-12 h-12 text-blue-500 mb-4" />
             <h3 className="text-xl font-montserrat font-semibold mb-2">Expert Techniques</h3>
             <p className="text-gray-400">Master footwork, smashing, and defensive skills</p>
           </div>
           
-          <div className="bg-slate-800/50 p-6 rounded-lg border border-slate-700 hover:border-blue-500/50 transition-all duration-300">
+          <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-lg border border-slate-700 hover:border-blue-500/50 transition-all duration-300">
             <Award className="w-12 h-12 text-blue-500 mb-4" />
             <h3 className="text-xl font-montserrat font-semibold mb-2">Professional Experience</h3>
             <p className="text-gray-400">Learn from national-level expertise and proven strategies</p>

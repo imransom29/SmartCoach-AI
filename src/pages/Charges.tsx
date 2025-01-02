@@ -4,14 +4,13 @@ import { useEffect } from "react";
 
 const Charges = () => {
   useEffect(() => {
-    // Animation for cards on scroll
     const cards = document.querySelectorAll('.pricing-card');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('animate-fade-in');
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
+          entry.target.classList.add('opacity-100');
+          entry.target.classList.add('translate-y-0');
         }
       });
     }, { threshold: 0.1 });
@@ -24,14 +23,14 @@ const Charges = () => {
   return (
     <div 
       className="min-h-screen bg-slate-900 text-white pt-20 relative"
-      style={{
-        backgroundImage: 'url("https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&q=80")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}
     >
-      <div className="absolute inset-0 bg-slate-900/90 backdrop-blur-sm" />
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-fixed"
+        style={{
+          backgroundImage: 'url("https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&q=80")',
+          filter: 'brightness(0.2)'
+        }}
+      />
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 className="text-4xl md:text-5xl font-montserrat font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-violet-400 animate-fade-in">
@@ -158,10 +157,17 @@ const Charges = () => {
             </div>
           </Card>
 
-          <div className="mt-8 p-4 bg-blue-500/10 rounded-lg border border-blue-500/20 animate-pulse">
-            <p className="text-center text-gray-300">
-              All plans include 8 sessions per month. Starting from January 15th onwards.
-            </p>
+          <div className="mt-8 space-y-4">
+            <div className="p-4 bg-blue-500/10 rounded-lg border border-blue-500/20 animate-pulse">
+              <p className="text-center text-gray-300">
+                All plans include 8 sessions per month. Starting from January 15th onwards.
+              </p>
+            </div>
+            <div className="p-4 bg-violet-500/10 rounded-lg border border-violet-500/20">
+              <p className="text-center text-gray-300">
+                * Prices are negotiable based on commitment and group size. Contact us for custom packages.
+              </p>
+            </div>
           </div>
         </div>
       </div>
